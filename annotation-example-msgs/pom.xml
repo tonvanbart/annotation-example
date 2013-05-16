@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>annotation-example</artifactId>
+        <groupId>org.vanbart</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>annotation-example-msgs</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.vanbart</groupId>
+            <artifactId>annotation-example-handler</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--to check the localized messages-->
+            <!-- note: there is a preprocessor to do this in JDK6 -->
+<!--
+            <plugin>
+                <groupId>ch.qos.cal10n.plugins</groupId>
+                <artifactId>maven-cal10n-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>check-message-bundles</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                        <configuration>
+                            <enumTypes>
+                                <enumType>org.vanbart.logging.messages.LogEvents</enumType>
+                            </enumTypes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+-->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                    <annotationProcessors>
+<!--                        <annotationProcessor>org.vanbart.example.processor.BasicTextAnnotationProcessor</annotationProcessor>-->
+                        <annotationProcessor>org.vanbart.example.processor.TextAnnotationProcessor</annotationProcessor>
+                    </annotationProcessors>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+
+</project>

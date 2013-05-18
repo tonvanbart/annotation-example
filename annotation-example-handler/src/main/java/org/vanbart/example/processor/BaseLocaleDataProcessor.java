@@ -31,7 +31,7 @@ public abstract class BaseLocaleDataProcessor extends AbstractProcessor {
 
     protected Elements elementsUtil;
 
-    private static final boolean DEBUG = true;
+    protected static final boolean DEBUG = true;
 
     private static final Logger LOG = LoggerFactory.getLogger(BaseLocaleDataProcessor.class);
 
@@ -77,7 +77,9 @@ public abstract class BaseLocaleDataProcessor extends AbstractProcessor {
      * Handle an extracted Map of key/message pairs per Locale.
      * @param messagesPerLocale a Map of key/message pairs, keyed on Locale.
      */
-    protected abstract void processMessages(Map<String, Map<String,String>> messagesPerLocale, RoundEnvironment roundEnv);
+    protected void processMessages(Map<String, Map<String,String>> messagesPerLocale, RoundEnvironment roundEnv) {
+
+    };
 
     private void handleLocaleData(RoundEnvironment roundEnv, Element element) {
         debug("handleLocaleData(roundEnv,"+element.getSimpleName()+")");
@@ -128,21 +130,20 @@ public abstract class BaseLocaleDataProcessor extends AbstractProcessor {
 //        debug("javadoc for this element:"+elementsUtil.getDocComment(element));
     }
 
-    private void debug(String message) {
+    protected void debug(String message) {
         if (DEBUG) {
-            System.out.println(String.format("BaseLocaleDataProcessor: %s", message));
+            System.out.println(String.format("%s: %s", getClass().getSimpleName(), message));
         }
     }
 
-    private void debug(String msg, Locale[] locales) {
+    protected void debug(String msg, Locale[] locales) {
         if (DEBUG) {
             StringBuilder stringBuilder = new StringBuilder(msg).append("[");
             for (Locale locale : locales) {
                 stringBuilder.append(locale.value()).append(",");
             }
-            stringBuilder.deleteCharAt(stringBuilder.length()-1).append("]");
-            System.out.println("BaseLocaleDataProcessor: " + stringBuilder.toString());
+            stringBuilder.deleteCharAt(stringBuilder.length() - 1).append("]");
+            System.out.println(getClass().getSimpleName()+  ": " + stringBuilder.toString());
         }
     }
-
 }

@@ -30,7 +30,6 @@ import org.vanbart.example.annotation.Text;
 @SupportedAnnotationTypes({"org.vanbart.example.annotation.Text"})
 public class TextAnnotationProcessor extends BaseLocaleDataProcessor {
 
-    private static final boolean DEBUG = true;
     /**
      * package for generated property files, defaults to default package.
      */
@@ -104,7 +103,6 @@ public class TextAnnotationProcessor extends BaseLocaleDataProcessor {
 
     private void handleEnclosedElement(RoundEnvironment roundEnv, Element element,
             Map<String, Map<String, String>> messagesPerLocale) {
-        // TODO String or Locale? -> match value() from Locale to text from Text annotation.
         Text text = element.getAnnotation(Text.class);
         if (text != null) {
             debug("en - put(" + element.getSimpleName().toString() + "," + text.en() + ")");
@@ -112,23 +110,6 @@ public class TextAnnotationProcessor extends BaseLocaleDataProcessor {
             if (text.nl() != null) {
                 messagesPerLocale.get("nl").put(element.getSimpleName().toString(), text.nl());
             }
-        }
-    }
-
-    private void debug(String message) {
-        if (DEBUG) {
-            System.out.println(String.format("TextAnnotationProcessor: %s", message));
-        }
-    }
-
-    private void debug(String msg, Locale[] locales) {
-        if (DEBUG) {
-            StringBuilder stringBuilder = new StringBuilder(msg).append("[");
-            for (Locale locale : locales) {
-                stringBuilder.append(locale.value()).append(",");
-            }
-            stringBuilder.deleteCharAt(stringBuilder.length() - 1).append("]");
-            System.out.println("TextAnnotationProcessor: " + stringBuilder.toString());
         }
     }
 }
